@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Guess_The_Larper"
+run/main_scene="res://base.tscn"
+config/features=PackedStringArray("4.5", "C#", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+NetworkManager="*res://Script/NetworkManager.cs"
+GameMechanics="*res://Script/GameMechanics.cs"
+GameManagerID="*res://Script/GameManagerID.cs"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=500
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[dotnet]
+
+project/assembly_name="Guess_The_Larper"
+
+[rendering]
+
+renderer/rendering_method="mobile"

@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb4m0iq5btwe4"]
+
+[ext_resource type="Script" uid="uid://cnd1sqkvbds5g" path="res://Script/Lobby.cs" id="1_ll2xe"]
+
+[node name="Lobby" type="Node2D" node_paths=PackedStringArray("idlabel", "copy", "playerlist", "leave", "start")]
+script = ExtResource("1_ll2xe")
+idlabel = NodePath("Control/Label")
+copy = NodePath("Control/Copy")
+playerlist = NodePath("Control/ItemList")
+leave = NodePath("Control/Leave")
+start = NodePath("Control/start")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 718.0
+offset_bottom = 501.0
+
+[node name="Copy" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.79200006
+anchor_right = 0.99000007
+anchor_bottom = 0.142
+offset_left = 0.3439331
+offset_top = 1.0
+offset_right = 0.17993164
+offset_bottom = -0.14200592
+text = "Copy"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.004
+anchor_right = 0.77300006
+anchor_bottom = 0.142
+offset_left = 0.049999237
+offset_top = -0.004000187
+offset_right = -0.014038086
+offset_bottom = -0.14200592
+theme_override_font_sizes/font_size = 20
+text = "id"
+
+[node name="ItemList" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.071
+anchor_top = 0.18400002
+anchor_right = 0.70600003
+anchor_bottom = 0.81000006
+offset_left = 0.02199936
+offset_top = -0.18400574
+offset_right = 0.09197998
+offset_bottom = 0.18997192
+
+[node name="Leave" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.794
+anchor_top = 0.64500004
+anchor_right = 0.975
+anchor_bottom = 0.75600004
+offset_left = -0.092041016
+offset_top = -0.14501953
+offset_right = -0.049987793
+offset_bottom = 0.24398804
+text = "Leave"
+
+[node name="start" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.794
+anchor_top = 0.42100003
+anchor_right = 0.95100003
+anchor_bottom = 0.51100004
+offset_left = -0.092041016
+offset_top = 0.07897949
+offset_right = 0.1819458
+offset_bottom = -0.011016846
+text = "Start"

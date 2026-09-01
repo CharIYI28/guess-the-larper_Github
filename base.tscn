@@ -1,0 +1,106 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu3wa55etok4o"]
+
+[ext_resource type="Script" uid="uid://g4q006v3n6an" path="res://Script/Base.cs" id="1_rpg24"]
+
+[node name="Base" type="Node2D" node_paths=PackedStringArray("hostbutton", "joinbutton", "lineid", "labeljoin", "copy", "nameinput")]
+script = ExtResource("1_rpg24")
+hostbutton = NodePath("Control/Host")
+joinbutton = NodePath("Control/Join")
+lineid = NodePath("Control/LineEdit")
+labeljoin = NodePath("Control/Label")
+copy = NodePath("Control/Copy")
+nameinput = NodePath("Control/Name")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -102.0
+offset_top = -396.0
+offset_right = 817.0
+offset_bottom = 536.0
+
+[node name="Join" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.337
+anchor_top = 0.694
+anchor_right = 0.65800005
+anchor_bottom = 0.80600005
+offset_left = 0.34898376
+offset_top = -0.4840088
+offset_right = 0.2659607
+offset_bottom = 0.48388672
+theme_override_font_sizes/font_size = 100
+text = "Join"
+metadata/_edit_use_anchors_ = true
+
+[node name="Host" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.49300003
+anchor_right = 0.65400004
+anchor_bottom = 0.606
+offset_left = 0.24099731
+offset_top = 0.001953125
+offset_right = 0.15795898
+offset_bottom = -0.315979
+theme_override_font_sizes/font_size = 100
+text = "Host"
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34
+anchor_top = 0.63900006
+anchor_right = 0.65300006
+anchor_bottom = 0.66300005
+offset_left = 0.17999268
+offset_top = 0.24591064
+offset_right = -0.11904907
+offset_bottom = 0.381958
+placeholder_text = "ID"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.337
+anchor_top = 0.84700006
+anchor_right = 0.64500004
+anchor_bottom = 0.86500007
+offset_left = 0.34898376
+offset_top = -0.24206543
+offset_right = -0.33502197
+offset_bottom = -0.39013672
+text = "Disconnected"
+metadata/_edit_use_anchors_ = true
+
+[node name="Copy" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.684
+anchor_top = 0.77300006
+anchor_right = 0.83100003
+anchor_bottom = 0.837
+offset_left = 0.4039917
+offset_top = -0.43603516
+offset_right = 0.31097412
+offset_bottom = -0.083984375
+text = "Copy"
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="LineEdit" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.67600006
+anchor_top = 0.559
+anchor_right = 0.84900004
+anchor_bottom = 0.592
+offset_left = -0.24407959
+offset_top = 0.011962891
+offset_right = -0.23101807
+offset_bottom = 0.25598145
+placeholder_text = "Name"
+metadata/_edit_use_anchors_ = true

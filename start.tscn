@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://b31xsajixy1p7"]
+
+[ext_resource type="Texture2D" uid="uid://5h050nan50di" path="res://imports/Screenshot 2024-04-05 220126.png" id="1_ots34"]
+[ext_resource type="Script" uid="uid://cv54sp0mp1vl5" path="res://Script/Start.cs" id="1_qn1rc"]
+
+[node name="Start" type="Node2D" node_paths=PackedStringArray("decision")]
+script = ExtResource("1_qn1rc")
+decision = NodePath("Control/decision")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 727.0
+offset_bottom = 505.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(364, 126)
+scale = Vector2(0.4239573, 0.26287884)
+texture = ExtResource("1_ots34")
+
+[node name="You are a" type="TextEdit" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33800003
+anchor_top = 0.5
+anchor_right = 0.648
+anchor_bottom = 0.572
+offset_left = 0.27397156
+offset_top = -0.5
+offset_right = -0.0960083
+offset_bottom = 0.13998413
+text = "You are a:"
+
+[node name="decision" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.319
+anchor_top = 0.60400003
+anchor_right = 0.651
+anchor_bottom = 0.72700006
+offset_left = 0.08699036
+offset_top = -0.020019531
+offset_right = -0.27700806
+offset_bottom = -0.13504028
+text = "sddsdsds"
