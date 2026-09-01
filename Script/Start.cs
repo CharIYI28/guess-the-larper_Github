@@ -3,6 +3,7 @@ using System;
 
 public partial class Start : Node2D
 {
+	// this is a stest for a github
 	[Export] private Label decision;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,6 +26,7 @@ public partial class Start : Node2D
 		}
 		else
 		{
+			GD.Print("real fan here");
 			decision.Text = "Real Fan";
 		}
 	}
