@@ -3,9 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://5h050nan50di" path="res://imports/Screenshot 2024-04-05 220126.png" id="1_ots34"]
 [ext_resource type="Script" uid="uid://cv54sp0mp1vl5" path="res://Script/Start.cs" id="1_qn1rc"]
 
-[node name="Start" type="Node2D" node_paths=PackedStringArray("decision")]
+[node name="Start" type="Node2D" node_paths=PackedStringArray("decision", "timer", "timer2")]
 script = ExtResource("1_qn1rc")
 decision = NodePath("Control/decision")
+timer = NodePath("Timer")
+timer2 = NodePath("Timer2")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -43,3 +45,9 @@ offset_top = -0.020019531
 offset_right = -0.27700806
 offset_bottom = -0.13504028
 text = "sddsdsds"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.08
