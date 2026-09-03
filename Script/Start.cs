@@ -8,6 +8,7 @@ public partial class Start : Node2D
 	[Export] private Label decision;
 	[Export] private Timer timer;
 	[Export] private Timer timer2;
+	[Export] private Timer timer3;
 	public bool timeoutvar = true;
 	private bool judgeholder = false;
 	private int num1 = 0;
@@ -19,6 +20,7 @@ public partial class Start : Node2D
 		GameMechanics.instance.larperchecker();	
 		timer.Timeout += OnTimeout;
 		timer2.Timeout += OnTimeout2;
+		timer3.Timeout += OnTimeout3;
 		timeoutvar = false;
 		timer.Start();
 		timer2.Start();
@@ -35,8 +37,22 @@ public partial class Start : Node2D
 		GameMechanics.instance.textchanger -= Ontextchanger;
 		timer.Timeout -= OnTimeout;
 		timer2.Timeout -= OnTimeout2;
+		timer3.Timeout -= OnTimeout3;
 		num1 = 0;
 
+	}
+
+	private void OnTimeout3()
+	{
+		timer3.Stop();
+		if (judgeholder == true)
+		{
+			GetTree().ChangeSceneToFile("res://Larper_page.tscn");
+		}
+		else
+		{
+			GetTree().ChangeSceneToFile("res://Real_page.tscn");
+		}
 	}
 
 	private void OnTimeout()
@@ -45,6 +61,7 @@ public partial class Start : Node2D
 		timer2.Stop();
 		timeoutvar = true;
 		Ontextchanger(judgeholder);
+		timer3.Start();
 	}
 
 	private void OnTimeout2()

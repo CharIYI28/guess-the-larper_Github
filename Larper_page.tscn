@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq77a2wqkb2wn"]
+
+[ext_resource type="Texture2D" uid="uid://cu540d8lhkmed" path="res://imports/Screenshot 2026-01-24 205016.png" id="1_tn1kg"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 721.0
+offset_bottom = 517.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(365.00003, 166.00002)
+scale = Vector2(0.3051044, 0.27853882)
+texture = ExtResource("1_tn1kg")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.268
+anchor_top = 0.652
+anchor_right = 0.731
+anchor_bottom = 0.785
+offset_left = -0.22801208
+offset_top = -0.08401489
+offset_right = -0.05102539
+offset_bottom = -1.8450012
+theme_override_font_sizes/font_size = 50
+text = "L.O.D"
+horizontal_alignment = 1
