@@ -1,6 +1,19 @@
-[gd_scene format=3 uid="uid://btb67nviot73p"]
+[gd_scene load_steps=6 format=3 uid="uid://btb67nviot73p"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" uid="uid://cpwl86fk55fp1" path="res://Script/RealPage.cs" id="1_iiory"]
+[ext_resource type="Script" uid="uid://c2x7jh0w8xsrt" path="res://Script/Topic_template.cs" id="2_ciwn7"]
+[ext_resource type="Resource" uid="uid://g5au45iu21us" path="res://Resources/Topic1.tres" id="3_r3mps"]
+[ext_resource type="Resource" uid="uid://clitlwketu6jq" path="res://Resources/Topic2.tres" id="4_5okyd"]
+[ext_resource type="Resource" uid="uid://c2xmj6rsfy1pr" path="res://Resources/Topic3.tres" id="5_ciwn7"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("drumrolling", "tothemain", "topic_label", "maincontent", "maintimer")]
+script = ExtResource("1_iiory")
+drumrolling = NodePath("Drumrolling")
+tothemain = NodePath("Tothemain")
+topic_label = NodePath("Control/Topic!!")
+topics = Array[ExtResource("2_ciwn7")]([ExtResource("3_r3mps"), ExtResource("4_5okyd"), ExtResource("5_ciwn7")])
+maincontent = NodePath("Label")
+maintimer = NodePath("MainTimer")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -22,3 +35,31 @@ offset_bottom = 0.22099304
 theme_override_font_sizes/font_size = 50
 text = "Your Topic:"
 horizontal_alignment = 1
+
+[node name="Topic!!" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.367
+anchor_top = 0.51100004
+anchor_right = 0.583
+anchor_bottom = 0.628
+offset_left = -0.27700806
+offset_top = -0.121032715
+offset_right = -0.17300415
+offset_bottom = 0.09197998
+text = "dfdf"
+horizontal_alignment = 1
+
+[node name="MainTimer" type="Timer" parent="."]
+
+[node name="Drumrolling" type="Timer" parent="."]
+
+[node name="Tothemain" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 33.0
+offset_top = 25.0
+offset_right = 675.0
+offset_bottom = 474.0
+text = "dfdsfdsdsds"
+autowrap_mode = 3

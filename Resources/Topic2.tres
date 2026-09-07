@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://clitlwketu6jq"]
+
+[ext_resource type="Script" uid="uid://c2x7jh0w8xsrt" path="res://Script/Topic_template.cs" id="1_vatc4"]
+
+[resource]
+script = ExtResource("1_vatc4")
+name = "Shin"
+text = "fdfddafdafdghhjgfdsfjkjhgfdsdfghjkjhgfdsdfghjkjhgfdsdfghjk"

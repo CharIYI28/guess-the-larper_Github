@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://g5au45iu21us"]
+
+[ext_resource type="Script" uid="uid://c2x7jh0w8xsrt" path="res://Script/Topic_template.cs" id="1_nykq7"]
+
+[resource]
+script = ExtResource("1_nykq7")
+name = "Magic"
+text = "fakfhakfhdkfhajfhdakfhaklfhdsakfhkdfhasdkfhlkfhfkhasklfhas"
