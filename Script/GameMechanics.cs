@@ -10,6 +10,7 @@ public partial class GameMechanics : Node
 	private Random _random = new Random();
 	public event System.Action<bool> textchanger;
 	public int thechosen;
+	public bool larper_ = false;
 	public override void _Ready()
 	{
 		instance = this;
@@ -37,6 +38,7 @@ public partial class GameMechanics : Node
 		if (thechosen == GameManagerID.Instance.mycustomid)
 		{
 			textchanger?.Invoke(true);
+			larper_ = true;
 			GD.Print("larper i am");
 		}
 		else
@@ -45,9 +47,8 @@ public partial class GameMechanics : Node
 			GD.Print("real fan");
 		}
 	}
-	
-	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
-	private void trustedchecker()
+
+	public void larpertimer()
 	{
 		
 	}
