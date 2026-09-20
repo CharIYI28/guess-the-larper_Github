@@ -12,6 +12,10 @@ public partial class GameMechanics : Node
 	public event System.Action larpertimestart;
 	public int thechosen;
 	public bool larper_ = false;
+	public int topicrandom = 0;
+	public  int gamerandomholder = 0;
+	public int myid = 0;
+	public int currentholder = 0;
 	public override void _Ready()
 	{
 		instance = this;
@@ -61,6 +65,20 @@ public partial class GameMechanics : Node
 		{
 			larpertimestart?.Invoke();
 		}
+	}
+
+	public void randomshuffle()
+	{
+		if (!Multiplayer.IsServer()) return;
+		gamerandomholder = GD.RandRange(0, topicrandom-1);
+		Rpc(MethodName.sendtopic, gamerandomholder);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	private void sendtopic(int number)
+	{
+		currentholder = number;
+		GD.Print(currentholder);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

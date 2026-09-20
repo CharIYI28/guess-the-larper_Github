@@ -24,8 +24,10 @@ public partial class RealPage : Node2D
 		topic_label.Visible = true;
 		// topic__.Visible = true;
 		alltopics = topics.Count;
-		random_holder = GD.RandRange(0, alltopics-1);
-		GD.Print(random_holder);
+		GameMechanics.instance.topicrandom = topics.Count;
+		GameMechanics.instance.randomshuffle();
+		// random_holder = GD.RandRange(0, alltopics-1);
+		// GD.Print(random_holder);
 		drumrolling.Timeout += Ondrumout;
 		tothemain.Timeout += Ontothemain;
 		maintimer.Timeout += Onmaintimer;
@@ -41,6 +43,7 @@ public partial class RealPage : Node2D
 
 	private void Ondrumout()
 	{
+		random_holder = GameMechanics.instance.currentholder;
 		topic_label.Text = $"{topics[random_holder].name}";
 		drumrolling.Stop();
 		tothemain.Start();

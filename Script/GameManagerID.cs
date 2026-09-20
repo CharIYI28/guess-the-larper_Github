@@ -54,6 +54,7 @@ public partial class GameManagerID : Node
 		GD.Print($"chosen:{chosen}");
 		GameMechanics.instance.ids = allcustomids;
 		GameMechanics.instance.thechosen = chosen;
+		GameMechanics.instance.myid = mycustomid;
 	}
 
     // private void PeerConnected(long id)
