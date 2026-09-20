@@ -9,6 +9,7 @@ public partial class GameMechanics : Node
 	public static GameMechanics instance {get; private set;}
 	private Random _random = new Random();
 	public event System.Action<bool> textchanger;
+	public event System.Action larpertimestart;
 	public int thechosen;
 	public bool larper_ = false;
 	public override void _Ready()
@@ -50,7 +51,16 @@ public partial class GameMechanics : Node
 
 	public void larpertimer()
 	{
-		
+		Rpc(MethodName.caller);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	private void caller()
+	{
+		if (larper_ == true)
+		{
+			larpertimestart?.Invoke();
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

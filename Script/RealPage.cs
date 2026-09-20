@@ -48,6 +48,7 @@ public partial class RealPage : Node2D
 
 	private void Ontothemain()
 	{
+		tothemain.Stop();
 		maincontent.Text = $"{topics[random_holder].text}";
 		maincontent.Visible = true;
 		timer.Visible = true;
@@ -55,18 +56,28 @@ public partial class RealPage : Node2D
 		// topic__.Visible = false;
 		topic_label.Visible = false;
 		maintimer.Start();
-
-		if (GameMechanics.instance.larper_ == true)
-		{
-			
-		}
+		// if (Multiplayer.IsServer())
+		// {
+		// 	Rpc(MethodName.sender);
+		// }
+		GameMechanics.instance.larpertimer();
 	}
+	
+	// [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	// private void sender()
+	// {
+	// 	if (GameMechanics.instance.larper_ == true)
+	// 	{
+	// 		GameMechanics.instance.larpertimer();
+	// 	}
+	// }
 
 	private void Onmaintimer()
 	{		
 		if (currentmin == 0)
 		{
 			GD.Print("time out");
+			maintimer.Stop();
 		}
 		else
 		{

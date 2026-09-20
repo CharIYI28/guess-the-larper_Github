@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq77a2wqkb2wn"]
+[gd_scene load_steps=3 format=3 uid="uid://cq77a2wqkb2wn"]
 
 [ext_resource type="Texture2D" uid="uid://cu540d8lhkmed" path="res://imports/Screenshot 2026-01-24 205016.png" id="1_tn1kg"]
+[ext_resource type="Script" uid="uid://bkte7754jjal" path="res://Script/LarperPage.cs" id="1_w2100"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Larper_page" type="Node2D" node_paths=PackedStringArray("timer", "labeltime")]
+script = ExtResource("1_w2100")
+timer = NodePath("time")
+labeltime = NodePath("Timer")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -29,3 +33,12 @@ offset_bottom = -1.8450012
 theme_override_font_sizes/font_size = 50
 text = "L.O.D"
 horizontal_alignment = 1
+
+[node name="Timer" type="Label" parent="."]
+offset_left = 542.0
+offset_top = 396.0
+offset_right = 675.0
+offset_bottom = 448.0
+text = "60"
+
+[node name="time" type="Timer" parent="."]
