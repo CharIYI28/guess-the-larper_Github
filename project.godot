@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Guess_The_Larper"
-run/main_scene="res://base.tscn"
+run/main_scene="uid://cto28ksuja3el"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 

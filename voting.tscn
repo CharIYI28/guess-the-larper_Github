@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=3 uid="uid://cto28ksuja3el"]
+
+[ext_resource type="Script" uid="uid://71plh5lox4ur" path="res://Script/Voting.cs" id="1_wo820"]
+
+[node name="Voting" type="Node2D" node_paths=PackedStringArray("buttons")]
+script = ExtResource("1_wo820")
+buttons = [NodePath("Control/Button"), NodePath("Control/Button2"), NodePath("Control/Button3"), NodePath("Control/Button4"), NodePath("Control/Button5"), NodePath("Control/Button6")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 718.0
+offset_bottom = 507.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.149
+anchor_right = 0.075
+anchor_bottom = 0.149
+offset_left = 21.3
+offset_top = 47.201996
+offset_right = 158.3
+offset_bottom = 105.201996
+text = "ffff"
+
+[node name="Button2" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.149
+anchor_right = 0.075
+anchor_bottom = 0.149
+offset_left = 188.3
+offset_top = 47.201996
+offset_right = 325.3
+offset_bottom = 105.201996
+text = "ffff"
+
+[node name="Button3" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.149
+anchor_right = 0.075
+anchor_bottom = 0.149
+offset_left = 377.3
+offset_top = 47.201996
+offset_right = 514.3
+offset_bottom = 105.201996
+text = "ffff"
+
+[node name="Button4" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.149
+anchor_right = 0.075
+anchor_bottom = 0.149
+offset_left = 25.3
+offset_top = 128.202
+offset_right = 162.3
+offset_bottom = 186.202
+text = "ffff"
+
+[node name="Button5" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.149
+anchor_right = 0.075
+anchor_bottom = 0.149
+offset_left = 190.3
+offset_top = 126.201996
+offset_right = 327.3
+offset_bottom = 184.202
+text = "ffff"
+
+[node name="Button6" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.149
+anchor_right = 0.075
+anchor_bottom = 0.149
+offset_left = 381.3
+offset_top = 128.202
+offset_right = 518.3
+offset_bottom = 186.202
+text = "ffff"
