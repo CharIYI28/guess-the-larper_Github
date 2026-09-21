@@ -6,11 +6,13 @@ public partial class GameMechanics : Node
 {
 	public Dictionary<long, Godot.Collections.Dictionary> playersingame = new Dictionary<long, Godot.Collections.Dictionary>();
 	public Godot.Collections.Array<int> ids = new Godot.Collections.Array<int>();
+	public Godot.Collections.Array<int> votes = new Godot.Collections.Array<int>();
 	public static GameMechanics instance {get; private set;}
 	private Random _random = new Random();
 	public event System.Action<bool> textchanger;
 	public event System.Action larpertimestart;
 	public event System.Action<string, int> namechange;
+	public event System.Action votesignal;
 	public int thechosen;
 	public bool larper_ = false;
 	public int topicrandom = 0;
@@ -92,6 +94,29 @@ public partial class GameMechanics : Node
 	private void receiveidname(int id, string name)
 	{
 		namechange?.Invoke(name, id);
+	}
+
+	public void endcaller()
+	{
+		Rpc(MethodName.sendingsignals);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal =true, TransferMode =MultiplayerPeer.TransferModeEnum.Reliable)]
+	private void sendingsignals()
+	{
+		votesignal?.Invoke();
+	}
+
+	public void votereceive(int vote)
+	{
+		Rpc(MethodName.votecollector, vote);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal =true, TransferMode =MultiplayerPeer.TransferModeEnum.Reliable)]
+	private void votecollector(int vote)
+	{
+		votes.Add(vote);
+		GD.Print(votes);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

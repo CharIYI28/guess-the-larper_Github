@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://71plh5lox4ur" path="res://Script/Voting.cs" id="1_wo820"]
 
-[node name="Voting" type="Node2D" node_paths=PackedStringArray("buttons", "timer")]
+[node name="Voting" type="Node2D" node_paths=PackedStringArray("buttons", "timer", "votebutn", "endbtn")]
 script = ExtResource("1_wo820")
 buttons = [NodePath("Control/Button"), NodePath("Control/Button2"), NodePath("Control/Button3"), NodePath("Control/Button4"), NodePath("Control/Button5"), NodePath("Control/Button6")]
 timer = NodePath("Timer")
+votebutn = NodePath("Control/Vote")
+endbtn = NodePath("Control/end")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -101,5 +103,22 @@ offset_right = 312.0
 offset_bottom = 76.0
 theme_override_font_sizes/font_size = 34
 text = "Vote"
+
+[node name="Vote" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 483.0
+offset_top = 346.0
+offset_right = 671.0
+offset_bottom = 400.0
+text = "VOTE"
+
+[node name="end" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 418.0
+offset_right = 647.0
+offset_bottom = 462.0
+text = "END
+"
 
 [node name="Timer" type="Timer" parent="."]
