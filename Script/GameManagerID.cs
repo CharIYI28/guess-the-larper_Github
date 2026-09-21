@@ -10,6 +10,7 @@ public partial class GameManagerID : Node
 	public int mycustomid {get; private set;} = -1;
 	private readonly HashSet<long> _verifiedIds = new HashSet<long>();
 	public Godot.Collections.Array<int> customids = new Godot.Collections.Array<int>();
+	public Godot.Collections.Array<int> realcustomids = new Godot.Collections.Array<int>();
 	private Random _random = new Random();
 	private int thechosen1;
 	public override void _Ready()
@@ -48,6 +49,7 @@ public partial class GameManagerID : Node
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
 	private void startmatchclient(Godot.Collections.Array<int> allcustomids, int assignedid, int chosen)
 	{
+		realcustomids = allcustomids;
 		mycustomid = assignedid;
 		GD.Print($"my id:{mycustomid}");
 		GD.Print($"all ids:{allcustomids}");

@@ -32,6 +32,7 @@ public partial class LarperPage : Node2D
 		{
 			GD.Print("time out");
 			timer.Stop();
+			GetTree().ChangeSceneToFile("res://voting.tscn");
 		}
 		else
 		{

@@ -39,6 +39,8 @@ public partial class RealPage : Node2D
     public override void _ExitTree()
     {
         drumrolling.Timeout -= Ondrumout;
+		tothemain.Timeout -= Ontothemain;
+		maintimer.Timeout -= Onmaintimer;
     }
 
 	private void Ondrumout()
@@ -81,6 +83,7 @@ public partial class RealPage : Node2D
 		{
 			GD.Print("time out");
 			maintimer.Stop();
+			GetTree().ChangeSceneToFile("res://voting.tscn");
 		}
 		else
 		{

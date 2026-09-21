@@ -42,6 +42,7 @@ public partial class Base : Node2D
 		NetworkManager.instance.hoster = true;
 		GetTree().ChangeSceneToFile("res://lobby.tscn");
 		NetworkManager.instance.localplayername = nameinput.Text.Trim();
+		GameMechanics.instance.myname = nameinput.Text.Trim();
 	}
 
 	private void HandleSuccessConnect()
@@ -67,6 +68,7 @@ public partial class Base : Node2D
 		if (!string.IsNullOrEmpty(roomid))
 		{
 			NetworkManager.instance.localplayername = name;
+			GameMechanics.instance.myname = name;
 			await NetworkManager.instance.JoinRoom(roomid,name);
 			labeljoin.Text = $"Status: Connecting to {roomid}...";
 			

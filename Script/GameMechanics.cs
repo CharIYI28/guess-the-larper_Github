@@ -10,12 +10,14 @@ public partial class GameMechanics : Node
 	private Random _random = new Random();
 	public event System.Action<bool> textchanger;
 	public event System.Action larpertimestart;
+	public event System.Action<string, int> namechange;
 	public int thechosen;
 	public bool larper_ = false;
 	public int topicrandom = 0;
 	public  int gamerandomholder = 0;
 	public int myid = 0;
 	public int currentholder = 0;
+	public string myname = "";
 	public override void _Ready()
 	{
 		instance = this;
@@ -79,6 +81,17 @@ public partial class GameMechanics : Node
 	{
 		currentholder = number;
 		GD.Print(currentholder);
+	}
+
+	public void name_giverremote(int num, string name)
+	{
+		Rpc(MethodName.receiveidname, num, name);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal =true, TransferMode =MultiplayerPeer.TransferModeEnum.Reliable)]
+	private void receiveidname(int id, string name)
+	{
+		namechange?.Invoke(name, id);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
