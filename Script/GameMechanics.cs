@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class GameMechanics : Node
 {
@@ -117,6 +118,18 @@ public partial class GameMechanics : Node
 	{
 		votes.Add(vote);
 		GD.Print(votes);
+
+	}
+
+	public void initiatemode()
+	{
+		CalculateMode(votes);
+	}
+	private void CalculateMode(Godot.Collections.Array<int> votes)
+	{
+		var grouped = votes.GroupBy(n => n);
+        int maxCount = grouped.Max(g => g.Count());
+		GD.Print(maxCount, grouped);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

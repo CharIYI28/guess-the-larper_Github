@@ -5,6 +5,7 @@ public partial class Voting : Node2D
 {
 	[Export] public Godot.Collections.Array<Button> buttons = new Godot.Collections.Array<Button>();
 	[Export] private Timer timer;
+	[Export] private Timer timer2;
 	[Export] private Button votebutn;
 	[Export] private Button endbtn;
 	private Godot.Collections.Array<int> btnid = new Godot.Collections.Array<int>();
@@ -19,6 +20,7 @@ public partial class Voting : Node2D
 		GD.Print(GameManagerID.Instance.realcustomids);
 		GameMechanics.instance.namechange += NameChanger;
 		timer.Timeout += Ontimeout;
+		timer2.Timeout += Ontime2out;
 		votebutn.Pressed += Onvotepressed;
 		endbtn.Pressed += Onendpressed;
 		GameMechanics.instance.votesignal += Onvotesignal;
@@ -77,6 +79,17 @@ public partial class Voting : Node2D
 		}
 	}
 
+    public override void _ExitTree()
+    {
+        GameMechanics.instance.namechange -= NameChanger;
+		timer.Timeout -= Ontimeout;
+		timer2.Timeout -= Ontime2out;
+		votebutn.Pressed -= Onvotepressed;
+		endbtn.Pressed -= Onendpressed;
+		GameMechanics.instance.votesignal -= Onvotesignal;
+    }
+
+
 	private void Onpressed(int num)
 	{
 		newbtn = buttons[num];
@@ -105,10 +118,17 @@ public partial class Voting : Node2D
 	private void Onvotesignal()
 	{
 		GameMechanics.instance.votereceive(finalfinalvote);
+		timer2.Start();
 	}
 	private void NameChanger(string name, int id)
 	{
 		buttons[id].Text = name;
+	}
+
+	private void Ontime2out()
+	{
+		timer2.Stop();
+		GetTree().ChangeSceneToFile("res://finalscene.tscn");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

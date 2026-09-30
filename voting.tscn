@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://71plh5lox4ur" path="res://Script/Voting.cs" id="1_wo820"]
 
-[node name="Voting" type="Node2D" node_paths=PackedStringArray("buttons", "timer", "votebutn", "endbtn")]
+[node name="Voting" type="Node2D" node_paths=PackedStringArray("buttons", "timer", "timer2", "votebutn", "endbtn")]
 script = ExtResource("1_wo820")
 buttons = [NodePath("Control/Button"), NodePath("Control/Button2"), NodePath("Control/Button3"), NodePath("Control/Button4"), NodePath("Control/Button5"), NodePath("Control/Button6")]
 timer = NodePath("Timer")
+timer2 = NodePath("NextTimer")
 votebutn = NodePath("Control/Vote")
 endbtn = NodePath("Control/end")
 
@@ -122,3 +123,5 @@ text = "END
 "
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="NextTimer" type="Timer" parent="."]

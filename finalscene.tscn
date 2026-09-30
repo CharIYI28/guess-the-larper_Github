@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://cvhridvdk1koe"]
+[gd_scene load_steps=2 format=3 uid="uid://cvhridvdk1koe"]
+
+[ext_resource type="Script" uid="uid://bcfaickjeb4on" path="res://Script/Finalscene.cs" id="1_h2xvv"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_h2xvv")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
