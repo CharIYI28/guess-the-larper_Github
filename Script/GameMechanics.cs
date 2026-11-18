@@ -21,6 +21,9 @@ public partial class GameMechanics : Node
 	public int myid = 0;
 	public int currentholder = 0;
 	public string myname = "";
+	public int mode = 0;
+	public event System.Action showchecker;
+	public event System.Action<string, int> sendresult;
 	public override void _Ready()
 	{
 		instance = this;
@@ -113,11 +116,11 @@ public partial class GameMechanics : Node
 		Rpc(MethodName.votecollector, vote);
 	}
 
-	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal =true, TransferMode =MultiplayerPeer.TransferModeEnum.Reliable)]
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode =MultiplayerPeer.TransferModeEnum.Reliable)]
 	private void votecollector(int vote)
 	{
 		votes.Add(vote);
-		GD.Print(votes);
+		GD.Print("votes" + votes);
 
 	}
 
@@ -125,11 +128,58 @@ public partial class GameMechanics : Node
 	{
 		CalculateMode(votes);
 	}
+
 	private void CalculateMode(Godot.Collections.Array<int> votes)
 	{
-		var grouped = votes.GroupBy(n => n);
-        int maxCount = grouped.Max(g => g.Count());
-		GD.Print(maxCount, grouped);
+		Dictionary<int, int> counts = new Dictionary<int, int>();
+		foreach (int vote in votes)
+		{
+			if (counts.ContainsKey(vote))
+			{
+				counts[vote]++;
+			}
+			else
+			{
+				counts[vote] = 1;
+			}
+		}
+
+		mode = votes[0];
+		int maxcount = 0;
+
+		foreach (var pair in counts)
+		{
+			GD.Print("pair-->" + pair.Value);
+			if (pair.Value > maxcount)
+			{
+				maxcount = pair.Value;
+				mode = pair.Key;
+			}
+			else if (pair.Value == maxcount)
+			{
+				mode = -1;
+			}
+		}
+
+		GD.Print("mode: " + mode);
+		showresultcaller();
+	}
+
+	public void showresultcaller()
+	{
+		// Rpc(MethodName.showresultname);
+		showchecker?.Invoke();
+	}
+
+	public void recievname(string name, int id)
+	{
+		Rpc(MethodName.showresultname, name, id);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	public void showresultname(string name, int id)
+	{
+		sendresult?.Invoke(name, id);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

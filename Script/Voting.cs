@@ -35,7 +35,7 @@ public partial class Voting : Node2D
 		{
 			Button btn = buttons[i];
 			int index = i;
-			btn.Pressed += () => Onpressed(index);
+			btn.Pressed += () => Onpressed(btnid[index], index);
 			btn.Visible = false;
 		}
 
@@ -67,10 +67,13 @@ public partial class Voting : Node2D
 	}
 	private void systemstaart()
 	{
-		for (int i=0; i < GameManagerID.Instance.realcustomids.Count; i++)
+		for (int i=0; i < GameManagerID.Instance.realcustomids.Count-1; i++)
 		{
 			Button btnn = buttons[i];
 			btnn.Visible = true;
+		}
+		for (int i=0; i < GameManagerID.Instance.realcustomids.Count; i++)
+		{
 			btnid.Add(i);
 			if (GameManagerID.Instance.mycustomid == i)
 			{
@@ -90,10 +93,9 @@ public partial class Voting : Node2D
     }
 
 
-	private void Onpressed(int num)
+	private void Onpressed(int num, int init_ind)
 	{
-		newbtn = buttons[num];
-
+		newbtn = buttons[init_ind];
 		if (selectedbtn != null)
 		{
 			selectedbtn.RemoveThemeStyleboxOverride("normal");
@@ -102,7 +104,7 @@ public partial class Voting : Node2D
 		newbtn.AddThemeStyleboxOverride("normal", selectedStyle);
 		selectedbtn = newbtn;
 		GD.Print("btn");
-		GD.Print(btnid[num]);
+		GD.Print(finalvote);
 	}
 
 	private void Onvotepressed()
@@ -122,7 +124,30 @@ public partial class Voting : Node2D
 	}
 	private void NameChanger(string name, int id)
 	{
-		buttons[id].Text = name;
+		if (name != GameMechanics.instance.myname)
+		{
+			// if (id == 0)
+			// {
+			// 	condition = 0;
+			// 	buttons[id-condition].Text = name;
+			// } else if (name == GameMechanics.instance.myname){
+			// 	buttons[id].Text = name;
+			// }
+			// else
+			// {
+			// 	condition = 1;
+			// 	buttons[id-condition].Text = name;
+			// }
+			if (id > GameManagerID.Instance.mycustomid)
+			{
+				buttons[id-1].Text = name;
+			} else
+			{
+				buttons[id].Text = name;
+			}
+		}
+		btnid.Remove(GameManagerID.Instance.mycustomid);
+		GD.Print(btnid);
 	}
 
 	private void Ontime2out()
