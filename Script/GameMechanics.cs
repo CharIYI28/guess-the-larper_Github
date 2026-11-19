@@ -24,6 +24,7 @@ public partial class GameMechanics : Node
 	public int mode = 0;
 	public event System.Action showchecker;
 	public event System.Action<string, int> sendresult;
+	public event System.Action leave;
 	public override void _Ready()
 	{
 		instance = this;
@@ -180,6 +181,25 @@ public partial class GameMechanics : Node
 	public void showresultname(string name, int id)
 	{
 		sendresult?.Invoke(name, id);
+	}
+
+	public void returncommand()
+	{
+		Rpc(MethodName.returning);
+
+		GetTree().CreateTimer(0.1f).Timeout += () =>
+		{
+			returning();
+		};
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	private void returning()
+	{
+		GameManagerID.Instance.thechosen1 = -1;
+		// GetTree().ChangeSceneToFile("res://lobby.tscn");
+		votes.Clear();
+		leave?.Invoke();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

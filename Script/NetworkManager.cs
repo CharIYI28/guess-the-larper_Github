@@ -12,6 +12,8 @@ public partial class NetworkManager : Node
 	public bool hoster = false;
 	
 	public string localplayername = "player";
+
+	public string currentroomid = "";
 	public event System.Action sucessconnection;
 	public event System.Action failedconnection;
 	public event System.Action listupdate;
@@ -72,6 +74,8 @@ public partial class NetworkManager : Node
 
 		Multiplayer.MultiplayerPeer = (MultiplayerPeer)_matchaRoom;
 		string roomid = (string)_matchaRoom.Get("room_id");
+
+		currentroomid = roomid;
 		
 		GD.Print($"[Host] Room created: {roomid}");
 
@@ -205,6 +209,7 @@ public partial class NetworkManager : Node
 
 	private void cleanupoldpeer()
 	{
+		currentroomid = ""; // <-- Add this line
 		Multiplayer.MultiplayerPeer = new OfflineMultiplayerPeer();
 		if (_matchaRoom != null && IsInstanceValid(_matchaRoom))
 		{

@@ -15,13 +15,26 @@ public partial class Lobby : Node2D
 		start.Visible = false;
 		copy.Visible = false;
 
+		bool isAlreadyConnected = Multiplayer.MultiplayerPeer != null &&
+		!(Multiplayer.MultiplayerPeer is OfflineMultiplayerPeer) &&
+		Multiplayer.MultiplayerPeer.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Connected;
+
 		if (NetworkManager.instance.hoster == true)
 		{
 			copy.Visible = true;
 			start.Visible = true;
-			string roomid = NetworkManager.instance.HostRoom(NetworkManager.instance.localplayername);
-			idlabel.Text = $"Status: Hosting Room ID: {roomid}";
-			currentid = roomid;
+
+			if (!isAlreadyConnected)
+			{
+				string roomid = NetworkManager.instance.HostRoom(NetworkManager.instance.localplayername);
+				NetworkManager.instance.currentroomid = roomid;
+				currentid = roomid;
+			} else
+			{
+				currentid = NetworkManager.instance.currentroomid;
+			}
+			idlabel.Text = $"Status: Hosting Room ID: {currentid}";
+			
 		}
 		else
 		{

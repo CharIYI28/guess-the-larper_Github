@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bcfaickjeb4on" path="res://Script/Finalscene.cs" id="1_h2xvv"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("labelname", "title", "answer", "announce")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("labelname", "title", "announce", "answer", "endbtn", "leavetimer")]
 script = ExtResource("1_h2xvv")
 labelname = NodePath("Control/Name")
 title = NodePath("Control/Label")
-answer = NodePath("Control/answer")
 announce = NodePath("announce")
+answer = NodePath("Control/answer")
+endbtn = NodePath("Control/Button")
+leavetimer = NodePath("leave")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -42,4 +44,20 @@ offset_bottom = 275.0
 theme_override_font_sizes/font_size = 30
 text = "TADDDDAAAA"
 
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.619
+anchor_top = 0.596
+anchor_right = 0.82100004
+anchor_bottom = 0.78900003
+offset_left = -0.013000488
+offset_top = 0.23199463
+offset_right = 0.1329956
+offset_bottom = 0.18798828
+text = "End"
+
 [node name="announce" type="Timer" parent="."]
+
+[node name="leave" type="Timer" parent="."]
+wait_time = 1.5

@@ -8,15 +8,21 @@ public partial class Finalscene : Node2D
 	[Export] private Label title;
 	[Export] private Timer announce;
 	[Export] private Label answer;
+	[Export] private Button endbtn;
+	[Export] private Timer leavetimer;
 	public override void _Ready()
 	{
 		// labelname.Text = GameMechanics.instance.mode;
 		GameMechanics.instance.showchecker += submitname;
 		GameMechanics.instance.sendresult += sentnamesubmit;
+		GameMechanics.instance.leave += leaving;
 		announce.Timeout += ontimeout;
 		GameMechanics.instance.initiatemode();
 		announce.Start();
 		answer.Visible = false;
+		endbtn.Visible = false;
+		endbtn.Pressed += endonpress;
+		leavetimer.Timeout += leavetimeout;
 	}
 
 	public void submitname()
@@ -26,6 +32,17 @@ public partial class Finalscene : Node2D
 			GameMechanics.instance.recievname(GameMechanics.instance.myname, GameManagerID.Instance.mycustomid);
 		}
 	}
+
+    public override void _ExitTree()
+    {
+        GameMechanics.instance.showchecker -= submitname;
+		GameMechanics.instance.sendresult -= sentnamesubmit;
+		GameMechanics.instance.leave -= leaving;
+		announce.Timeout -= ontimeout;
+		endbtn.Pressed -= endonpress;
+		leavetimer.Timeout -= leavetimeout;
+    }
+
 
 	public void sentnamesubmit(string name, int id)
 	{
@@ -43,6 +60,26 @@ public partial class Finalscene : Node2D
 	{
 		announce.Stop();
 		answer.Visible = true;
+		if (GameManagerID.Instance.mycustomid == 0)
+		{
+			endbtn.Visible = true;
+		}
+	}
+
+	private void endonpress()
+	{
+		GameMechanics.instance.returncommand();
+	}
+
+	private void leaving()
+	{
+		leavetimer.Start();
+	}
+
+	private void leavetimeout()
+	{
+		leavetimer.Stop();
+		GetTree().ChangeSceneToFile("res://lobby.tscn");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

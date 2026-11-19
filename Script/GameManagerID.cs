@@ -12,7 +12,7 @@ public partial class GameManagerID : Node
 	public Godot.Collections.Array<int> customids = new Godot.Collections.Array<int>();
 	public Godot.Collections.Array<int> realcustomids = new Godot.Collections.Array<int>();
 	private Random _random = new Random();
-	private int thechosen1;
+	public int thechosen1;
 	public override void _Ready()
 	{
 		Instance = this;
@@ -22,6 +22,7 @@ public partial class GameManagerID : Node
 	public void Onhostclickstart()
 	{
 		customids.Clear();
+		mycustomid = -1;
 		if (!Multiplayer.IsServer()) return;
 		var rawpeer = Multiplayer.GetPeers();
 
