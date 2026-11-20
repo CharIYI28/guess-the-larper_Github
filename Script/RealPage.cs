@@ -1,5 +1,7 @@
 using Godot;
+using GodotPlugins.Game;
 using System;
+using System.Numerics;
 
 public partial class RealPage : Node2D
 {
@@ -12,6 +14,7 @@ public partial class RealPage : Node2D
 	private int random_holder = 0;
 	[Export] private Godot.Collections.Array<Topic_template> topics = new Godot.Collections.Array<Topic_template>();
 	[Export] private Label maincontent;
+	[Export] private ScrollContainer scrollcontainermain;
 	[Export] private Timer maintimer;
 	[Export] private Label timer;
 	private int alltopics = 0;
@@ -33,7 +36,10 @@ public partial class RealPage : Node2D
 		maintimer.Timeout += Onmaintimer;
 		drumrolling.Start();
 		maincontent.Visible = false;
+		scrollcontainermain.Visible = false;
 		timer.Visible = false;
+
+		maincontent.CustomMinimumSize = new Godot.Vector2(scrollcontainermain.Size.X - 20, 0);
 	}
 
     public override void _ExitTree()
@@ -55,6 +61,8 @@ public partial class RealPage : Node2D
 	{
 		tothemain.Stop();
 		maincontent.Text = $"{topics[random_holder].text}";
+		scrollcontainermain.Visible = true;
+		scrollcontainermain.ScrollVertical = 0;
 		maincontent.Visible = true;
 		timer.Visible = true;
 		label.Visible = false;

@@ -39,10 +39,17 @@ public partial class Base : Node2D
 		// currentid = roomid;
 		// copy.Visible = true;
 		// GD.Print($"currentid is {currentid}");
-		NetworkManager.instance.hoster = true;
-		GetTree().ChangeSceneToFile("res://lobby.tscn");
-		NetworkManager.instance.localplayername = nameinput.Text.Trim();
-		GameMechanics.instance.myname = nameinput.Text.Trim();
+		if (nameinput.Text == "")
+		{
+			labeljoin.Text = "Please enter your name";
+		} else
+		{
+			NetworkManager.instance.hoster = true;
+			GetTree().ChangeSceneToFile("res://lobby.tscn");
+			NetworkManager.instance.localplayername = nameinput.Text.Trim();
+			GameMechanics.instance.myname = nameinput.Text.Trim();
+		}
+		
 	}
 
 	private void HandleSuccessConnect()
@@ -61,18 +68,25 @@ public partial class Base : Node2D
 	}
 	private async void PressJoinButton()
 	{
-		string roomid = lineid.Text.Trim();
-		string name = (nameinput != null && !string.IsNullOrWhiteSpace(nameinput.Text))
-			? nameinput.Text.Trim()
-			: "player";
-		if (!string.IsNullOrEmpty(roomid))
+		if (nameinput.Text == "")
 		{
-			NetworkManager.instance.localplayername = name;
-			GameMechanics.instance.myname = name;
-			await NetworkManager.instance.JoinRoom(roomid,name);
-			labeljoin.Text = $"Status: Connecting to {roomid}...";
-			
+			labeljoin.Text = "Please insert your name";
+		} else
+		{
+			string roomid = lineid.Text.Trim();
+			string name = (nameinput != null && !string.IsNullOrWhiteSpace(nameinput.Text))
+				? nameinput.Text.Trim()
+				: "player";
+			if (!string.IsNullOrEmpty(roomid))
+			{
+				NetworkManager.instance.localplayername = name;
+				GameMechanics.instance.myname = name;
+				await NetworkManager.instance.JoinRoom(roomid,name);
+				labeljoin.Text = $"Status: Connecting to {roomid}...";
+				
+			}
 		}
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
