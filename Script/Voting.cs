@@ -110,11 +110,13 @@ public partial class Voting : Node2D
 	private void Onvotepressed()
 	{
 		finalfinalvote = finalvote;
+		votebutn.Visible = false;
 	}
 
 	private void Onendpressed()
 	{
 		GameMechanics.instance.endcaller();
+		endbtn.Visible = false;
 	}
 
 	private void Onvotesignal()
@@ -126,18 +128,6 @@ public partial class Voting : Node2D
 	{
 		if (name != GameMechanics.instance.myname)
 		{
-			// if (id == 0)
-			// {
-			// 	condition = 0;
-			// 	buttons[id-condition].Text = name;
-			// } else if (name == GameMechanics.instance.myname){
-			// 	buttons[id].Text = name;
-			// }
-			// else
-			// {
-			// 	condition = 1;
-			// 	buttons[id-condition].Text = name;
-			// }
 			if (id > GameManagerID.Instance.mycustomid)
 			{
 				buttons[id-1].Text = name;

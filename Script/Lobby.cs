@@ -8,12 +8,20 @@ public partial class Lobby : Node2D
 	[Export] private ItemList playerlist;
 	[Export] private Button leave;
 	[Export] private Button start;
+	[Export] private Button buttonadd;
+	[Export] private Button buttonminus;
+	[Export] private Label labelnummax;
+	[Export] private Label maximumtext;
 	
 	string currentid = "";
 	public override void _Ready()
 	{
 		start.Visible = false;
 		copy.Visible = false;
+		buttonadd.Visible = false;
+		buttonminus.Visible = false;
+		labelnummax.Visible = false;
+		maximumtext.Visible = false;
 
 		bool isAlreadyConnected = Multiplayer.MultiplayerPeer != null &&
 		!(Multiplayer.MultiplayerPeer is OfflineMultiplayerPeer) &&
@@ -23,6 +31,10 @@ public partial class Lobby : Node2D
 		{
 			copy.Visible = true;
 			start.Visible = true;
+			buttonadd.Visible = true;
+			buttonminus.Visible = true;
+			labelnummax.Visible = true;
+			maximumtext.Visible = true;
 
 			if (!isAlreadyConnected)
 			{
@@ -45,9 +57,12 @@ public partial class Lobby : Node2D
 		copy.Pressed += PressCopyButton;
 		leave.Pressed += PressLeaveButton;
 		start.Pressed += PressStartButton;
+		buttonadd.Pressed += buttonaddpress;
+		buttonminus.Pressed += buttonminuspress;
 
 		NetworkManager.instance.listupdate += listupdater;
 		listupdater();
+		labelnummax.Text = $"{NetworkManager.instance.players.Count}";
 	}
 
 	private void PressStartButton()
@@ -99,8 +114,28 @@ public partial class Lobby : Node2D
 			NetworkManager.instance.listupdate -= listupdater;
 			copy.Pressed -= PressCopyButton;
 			leave.Pressed -= PressLeaveButton;
+			buttonadd.Pressed -= buttonaddpress;
+			buttonminus.Pressed -= buttonminuspress;
+			start.Pressed -= PressStartButton;
 		}
+	}
 
+	private void buttonaddpress()
+	{
+		if (NetworkManager.instance.maxplayer < 5)
+		{
+			NetworkManager.instance.maxplayer += 1;
+			labelnummax.Text = $"{NetworkManager.instance.maxplayer}";
+		}
+	}
+
+	private void buttonminuspress()
+	{
+		if (NetworkManager.instance.maxplayer > NetworkManager.instance.players.Count)
+		{
+			NetworkManager.instance.maxplayer -= 1;
+			labelnummax.Text = $"{NetworkManager.instance.maxplayer}";
+		}
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)

@@ -17,17 +17,38 @@ public partial class Finalscene : Node2D
 		GameMechanics.instance.sendresult += sentnamesubmit;
 		GameMechanics.instance.leave += leaving;
 		announce.Timeout += ontimeout;
-		GameMechanics.instance.initiatemode();
-		announce.Start();
-		answer.Visible = false;
-		endbtn.Visible = false;
+		// GameMechanics.instance.initiatemode();
 		endbtn.Pressed += endonpress;
 		leavetimer.Timeout += leavetimeout;
+
+		answer.Visible = false;
+		endbtn.Visible = false;
+
+		if (GameMechanics.instance.resultId != -99)
+		{
+			sentnamesubmit(GameMechanics.instance.resultName, GameMechanics.instance.resultId);
+		} 
+
+		if (Multiplayer.IsServer())
+		{
+			GetTree().CreateTimer(0.2f).Timeout += () =>
+			{
+				GameMechanics.instance.initiatemode();
+			};
+		}
+		announce.Start();
 	}
 
 	public void submitname()
 	{
-		if (GameMechanics.instance.mode == GameManagerID.Instance.mycustomid)
+		if (GameMechanics.instance.mode == -1)
+		{
+			if (Multiplayer.IsServer())
+			{
+				GameMechanics.instance.recievname("", -1);
+			}
+		}
+		else if (GameMechanics.instance.mode == GameManagerID.Instance.mycustomid)
 		{
 			GameMechanics.instance.recievname(GameMechanics.instance.myname, GameManagerID.Instance.mycustomid);
 		}
@@ -46,13 +67,18 @@ public partial class Finalscene : Node2D
 
 	public void sentnamesubmit(string name, int id)
 	{
+		title.Visible = true;
 		title.Text = $"{name} is a...";
 		if (GameMechanics.instance.thechosen == id)
 		{
 			answer.Text = "LARPER";
-		} else
+		} else if (id > -1)
 		{
 			answer.Text = "NOT LARPER";
+		} else if (id == -1)
+		{
+			answer.Text = "TIE";
+			title.Visible = false;
 		}
 	}
 

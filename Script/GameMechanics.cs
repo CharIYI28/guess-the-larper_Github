@@ -25,6 +25,8 @@ public partial class GameMechanics : Node
 	public event System.Action showchecker;
 	public event System.Action<string, int> sendresult;
 	public event System.Action leave;
+	public string resultName = "";
+	public int resultId = -99; // -99 = not calculated yet
 	public override void _Ready()
 	{
 		instance = this;
@@ -161,7 +163,6 @@ public partial class GameMechanics : Node
 				mode = -1;
 			}
 		}
-
 		GD.Print("mode: " + mode);
 		showresultcaller();
 	}
@@ -169,6 +170,14 @@ public partial class GameMechanics : Node
 	public void showresultcaller()
 	{
 		// Rpc(MethodName.showresultname);
+		// showchecker?.Invoke();
+		Rpc(MethodName.clientsubname, mode);
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	private void clientsubname(int calculatedmoded)
+	{
+		mode = calculatedmoded;
 		showchecker?.Invoke();
 	}
 
@@ -180,6 +189,8 @@ public partial class GameMechanics : Node
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
 	public void showresultname(string name, int id)
 	{
+		resultName = name;
+		resultId = id;
 		sendresult?.Invoke(name, id);
 	}
 
@@ -197,8 +208,9 @@ public partial class GameMechanics : Node
 	private void returning()
 	{
 		GameManagerID.Instance.thechosen1 = -1;
-		// GetTree().ChangeSceneToFile("res://lobby.tscn");
 		votes.Clear();
+		resultName = "";
+		resultId = -99;
 		leave?.Invoke();
 	}
 

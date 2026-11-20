@@ -20,6 +20,7 @@ public partial class NetworkManager : Node
 	private Callable _onjoinedmatcharoomcallable;
 	private Callable _onfailcallabe;
 	public Dictionary<long, Godot.Collections.Dictionary> players = new Dictionary<long, Godot.Collections.Dictionary>();
+	public int maxplayer;
     public override void _Ready()
     {
 		instance = this;
@@ -82,6 +83,7 @@ public partial class NetworkManager : Node
 		Registerid(Multiplayer.GetUniqueId(), localplayername);
 		GameMechanics.instance.ids.Add(Multiplayer.GetUniqueId());
 
+		maxplayer = players.Count;
 		return roomid;
 	}
 
@@ -122,14 +124,38 @@ public partial class NetworkManager : Node
 		long myid = Multiplayer.GetUniqueId();
 		// GameMechanics.instance.ids.Add(myid);
 		GD.Print($"[Event] Peer connected: {id}, My id: {myid}");
+
+		if (Multiplayer.IsServer())
+		{
+			if (players.Count >= maxplayer)
+			{
+				GD.Print("room is full");
+				RpcId(id, MethodName.kickroom);
+				return;
+			}
+		}
 		RpcId(id, MethodName.Sendplayerinfo, localplayername);
 	} 
+
+	[Rpc(MultiplayerApi.RpcMode.Authority, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	private void kickroom()
+	{
+		GD.Print("error full");
+		leaveroom();
+		failedconnection?.Invoke();
+		GetTree().ChangeSceneToFile("res://base.tscn");
+	}
 
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
 	private void Sendplayerinfo(string name)
 	{
 		long senderid = Multiplayer.GetRemoteSenderId();
 		// long senderid = Multiplayer.GetUniqueId();
+
+		if (Multiplayer.IsServer() && !players.ContainsKey(senderid) && players.Count >= maxplayer)
+		{
+			return;
+		}
 		Registerid(senderid, name);
 		RpcId(senderid, MethodName.Receiveplayerinfo, localplayername);
 	}
