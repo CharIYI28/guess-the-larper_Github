@@ -30,6 +30,10 @@ public partial class Base : Node2D
             NetworkManager.instance.sucessconnection -= HandleSuccessConnect;
 			NetworkManager.instance.failedconnection -= HandleFailedConnect;
         }
+
+		hostbutton.Pressed -= PressHostButton;
+		joinbutton.Pressed -= PressJoinButton;
+		copy.Pressed -= PressCopyButton;
     }
 
 	private void PressHostButton()

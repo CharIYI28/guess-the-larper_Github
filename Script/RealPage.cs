@@ -17,6 +17,7 @@ public partial class RealPage : Node2D
 	[Export] private ScrollContainer scrollcontainermain;
 	[Export] private Timer maintimer;
 	[Export] private Label timer;
+	private int randomfacts = 0;
 	private int alltopics = 0;
 
 	private int currentmin = 10;
@@ -60,7 +61,10 @@ public partial class RealPage : Node2D
 	private void Ontothemain()
 	{
 		tothemain.Stop();
-		maincontent.Text = $"{topics[random_holder].text}";
+
+		randomfacts = GD.RandRange(0, topics[random_holder].funfacts.Count-1);
+		maincontent.Text = $"{topics[random_holder].funfacts[randomfacts]}";
+
 		scrollcontainermain.Visible = true;
 		scrollcontainermain.ScrollVertical = 0;
 		maincontent.Visible = true;

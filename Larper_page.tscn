@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq77a2wqkb2wn"]
 
-[ext_resource type="Texture2D" uid="uid://cu540d8lhkmed" path="res://imports/Screenshot 2026-01-24 205016.png" id="1_tn1kg"]
 [ext_resource type="Script" uid="uid://bkte7754jjal" path="res://Script/LarperPage.cs" id="1_w2100"]
+[ext_resource type="Texture2D" uid="uid://dpu2rlu08y6u6" path="res://imports/orb.jpg" id="2_w2100"]
 
 [node name="Larper_page" type="Node2D" node_paths=PackedStringArray("timer", "labeltime")]
 script = ExtResource("1_w2100")
@@ -15,9 +15,9 @@ offset_right = 721.0
 offset_bottom = 517.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Control"]
-position = Vector2(365.00003, 166.00002)
-scale = Vector2(0.3051044, 0.27853882)
-texture = ExtResource("1_tn1kg")
+position = Vector2(358.00003, 169)
+scale = Vector2(0.3051044, 0.12519027)
+texture = ExtResource("2_w2100")
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 1

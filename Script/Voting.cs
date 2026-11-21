@@ -13,7 +13,7 @@ public partial class Voting : Node2D
 	private Button newbtn;
 	private StyleBoxFlat selectedStyle;
 	private int finalvote;
-	private int finalfinalvote;
+	private int finalfinalvote = -1;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
